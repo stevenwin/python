@@ -12,7 +12,21 @@ fm_tr = fm_tbody.find_all("tr", {"class": "b-statistics__table-row"})
 fm_td = fm_table.find_all("td", {"class": "b-statistics__table-col"})
 
 for tr in fm_tr:
-	print "First Name: " + tr.td.get_text().strip()
+	fname = tr.td
+	lname = fname.find_next("td")
+	nickname = lname.find_next("td")
+	height = nickname.find_next("td")
+	weight = height.find_next("td")
+	reach = weight.find_next("td")
+	stance = reach.find_next("td")
+	win = stance.find_next("td")
+	lose = win.find_next("td")
+	draw = lose.find_next("td")
+	
+	print("First Name: "+fname.get_text().strip())
+	print("Last Name: "+lname.get_text().strip())
+	print("Nickname: "+nickname.get_text().strip())
+	print("Height: "+height.get_text().strip())
 
 
 
