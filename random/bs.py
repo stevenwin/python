@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import json
 
 #fm = requests.get("http://fightmetric.com/statistics/fighters")
 
@@ -12,7 +13,15 @@ fm_tr = fm_tbody.find_all("tr", {"class": "b-statistics__table-row"})
 fm_td = fm_table.find_all("td", {"class": "b-statistics__table-col"})
 
 #Grab all the statistics
+
+# Put Data into JSON Object
+data = {}
+
+
+
+
 for tr in fm_tr:
+
 	fname = tr.td
 	lname = fname.find_next("td")
 	nickname = lname.find_next("td")
@@ -24,6 +33,11 @@ for tr in fm_tr:
 	lose = win.find_next("td")
 	draw = lose.find_next("td")
 	
+	data['fname'] = tr.td
+	data['lname'] = fname.find_next("td")
+	data['reach'] = weight.find_next("td")
+	json.data = json.dumps(data)
+
 	print("First Name: "+fname.get_text().strip())
 	print("Last Name: "+lname.get_text().strip())
 	print("Nickname: "+nickname.get_text().strip())
@@ -32,10 +46,11 @@ for tr in fm_tr:
 	print("")
 
 #Grab Fighter URLs
-fighterLink = []
+fighterLink = list()
 for link in fm_table.find_all("a", href=True):
-	print link['href']
+	fighterLink.append(link['href'])
 
+print fighterLink[0]
 
 
 """for book_title in all_book_titles:
